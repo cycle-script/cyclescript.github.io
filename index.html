@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTF Writeups Hub</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 40px 0;
+        }
+
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.2em;
+            font-weight: 300;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 40px;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+
+        .categories-section {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            height: fit-content;
+        }
+
+        .categories-section h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-item {
+            margin-bottom: 15px;
+        }
+
+        .category-link {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 8px;
+            text-decoration: none;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+
+        .category-link:hover {
+            transform: translateX(5px);
+            border-left-color: #667eea;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .category-count {
+            background: #667eea;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 0.8em;
+        }
+
+        .posts-section h2 {
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+
+        .post-card {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 25px;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: #667eea;
+        }
+
+        .post-title {
+            font-size: 1.3em;
+            color: #2c3e50;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+
+        .post-title:hover {
+            color: #667eea;
+        }
+
+        .post-meta {
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .tag {
+            background: #667eea;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            text-decoration: none;
+        }
+
+        .tag:hover {
+            background: #5a67d8;
+            color: white;
+        }
+
+        .post-excerpt {
+            color: #555;
+            line-height: 1.5;
+        }
+
+        .read-more {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            display: inline-block;
+            margin-top: 10px;
+        }
+
+        .read-more:hover {
+            text-decoration: underline;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 25px;
+            font-size: 1em;
+            margin-bottom: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .search-box:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 15px rgba(102, 126, 234, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+            padding: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🏴‍☠️ CTF Writeups Hub</h1>
+            <p class="subtitle">Documenting my capture the flag adventures</p>
+        </header>
+
+        <div class="main-content">
+            <aside class="categories-section">
+                <h2>Categories</h2>
+                <ul class="category-list">
+                    <li class="category-item">
+                        <a href="#" class="category-link" onclick="filterPosts('web')">
+                            <span>🌐 Web Exploitation</span>
+                            <span class="category-count">8</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link" onclick="filterPosts('crypto')">
+                            <span>🔐 Cryptography</span>
+                            <span class="category-count">12</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link" onclick="filterPosts('pwn')">
+                            <span>⚡ Pwn/Binary Exploitation</span>
+                            <span class="category-count">6</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link" onclick="filterPosts('reverse')">
+                            <span>🔍 Reverse Engineering</span>
+                            <span class="category-count">9</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link" onclick="filterPosts('forensics')">
+                            <span>🔬 Forensics</span>
+                            <span class="category-count">7</span>
+                        </a>
+                    </li>
+                    <li class="category-item">
+                        <a href="#" class="category-link" onclick="filterPosts('misc')">
+                            <span>🎯 Miscellaneous</span>
+                            <span class="category-count">5</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <main class="posts-section">
+                <h2>Latest Writeups</h2>
+                <input type="text" class="search-box" placeholder="🔍 Search writeups..." onkeyup="searchPosts(this.value)">
+                
+                <div id="posts-container">
+                    <article class="post-card" data-category="web">
+                        <h3><a href="#" class="post-title">SQL Injection in Login Form - PicoCTF 2024</a></h3>
+                        <div class="post-meta">📅 March 15, 2024 • 🏆 PicoCTF 2024</div>
+                        <div class="post-tags">
+                            <a href="#" class="tag">web</a>
+                            <a href="#" class="tag">sql-injection</a>
+                            <a href="#" class="tag">beginner</a>
+                        </div>
+                        <p class="post-excerpt">A classic SQL injection challenge where we had to bypass authentication using union-based injection techniques. The vulnerability was in the login form where user input wasn't properly sanitized...</p>
+                        <a href="#" class="read-more">Read full writeup →</a>
+                    </article>
+
+                    <article class="post-card" data-category="crypto">
+                        <h3><a href="#" class="post-title">RSA Factorization Challenge - HTB Cyber Apocalypse</a></h3>
+                        <div class="post-meta">📅 March 10, 2024 • 🏆 HTB Cyber Apocalypse 2024</div>
+                        <div class="post-tags">
+                            <a href="#" class="tag">crypto</a>
+                            <a href="#" class="tag">rsa</a>
+                            <a href="#" class="tag">factorization</a>
+                        </div>
+                        <p class="post-excerpt">This challenge involved factorizing a semi-prime RSA modulus using Pollard's rho algorithm. The key was recognizing that one of the prime factors had a specific mathematical property...</p>
+                        <a href="#" class="read-more">Read full writeup →</a>
+                    </article>
+
+                    <article class="post-card" data-category="pwn">
+                        <h3><a href="#" class="post-title">Buffer Overflow with ROP Chain - CSAW CTF</a></h3>
+                        <div class="post-meta">📅 March 5, 2024 • 🏆 CSAW CTF 2024</div>
+                        <div class="post-tags">
+                            <a href="#" class="tag">pwn</a>
+                            <a href="#" class="tag">buffer-overflow</a>
+                            <a href="#" class="tag">rop</a>
+                        </div>
+                        <p class="post-excerpt">A 64-bit binary exploitation challenge requiring a ROP chain to bypass modern protections. We had to carefully craft our payload to leak addresses and achieve code execution...</p>
+                        <a href="#" class="read-more">Read full writeup →</a>
+                    </article>
+
+                    <article class="post-card" data-category="reverse">
+                        <h3><a href="#" class="post-title">Cracking the Custom Cipher - ångstromCTF</a></h3>
+                        <div class="post-meta">📅 February 28, 2024 • 🏆 ångstromCTF 2024</div>
+                        <div class="post-tags">
+                            <a href="#" class="tag">reverse</a>
+                            <a href="#" class="tag">custom-cipher</a>
+                            <a href="#" class="tag">analysis</a>
+                        </div>
+                        <p class="post-excerpt">This reverse engineering challenge presented us with a binary implementing a custom encryption algorithm. Through static analysis and dynamic debugging, we uncovered the cipher logic...</p>
+                        <a href="#" class="read-more">Read full writeup →</a>
+                    </article>
+                </div>
+            </main>
+        </div>
+
+        <footer class="footer">
+            <p>Built with ❤️ for the CTF community | Follow me on <a href="#" style="color: white;">Twitter</a> | <a href="#" style="color: white;">GitHub</a></p>
+        </footer>
+    </div>
+
+    <script>
+        function filterPosts(category) {
+            const posts = document.querySelectorAll('.post-card');
+            posts.forEach(post => {
+                if (category === 'all' || post.dataset.category === category) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+
+            // Update active category
+            document.querySelectorAll('.category-link').forEach(link => {
+                link.style.backgroundColor = '';
+            });
+            event.target.closest('.category-link').style.backgroundColor = '#e3f2fd';
+        }
+
+        function searchPosts(query) {
+            const posts = document.querySelectorAll('.post-card');
+            const searchTerm = query.toLowerCase();
+            
+            posts.forEach(post => {
+                const title = post.querySelector('.post-title').textContent.toLowerCase();
+                const excerpt = post.querySelector('.post-excerpt').textContent.toLowerCase();
+                const tags = Array.from(post.querySelectorAll('.tag')).map(tag => tag.textContent.toLowerCase());
+                
+                const isMatch = title.includes(searchTerm) || 
+                               excerpt.includes(searchTerm) || 
+                               tags.some(tag => tag.includes(searchTerm));
+                
+                post.style.display = isMatch ? 'block' : 'none';
+            });
+        }
+
+        // Add show all functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const categoriesSection = document.querySelector('.category-list');
+            const showAllItem = document.createElement('li');
+            showAllItem.className = 'category-item';
+            showAllItem.innerHTML = `
+                <a href="#" class="category-link" onclick="filterPosts('all')">
+                    <span>📋 Show All</span>
+                    <span class="category-count">47</span>
+                </a>
+            `;
+            categoriesSection.insertBefore(showAllItem, categoriesSection.firstChild);
+        });
+    </script>
+</body>
+</html>
